@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import requests
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 import snscrape.modules.twitter as sntwitter
 
 print("Starting the bot...")
