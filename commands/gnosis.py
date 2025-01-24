@@ -79,6 +79,65 @@ class GnosisCommands(commands.Cog):
                 response = self.gnosis.respond(user_input)
                 await message.channel.send(f"**Gnosis:** {response}")
 
+from discord.ext import commands
+
+class Tips(commands.Cog):
+    """Commands for providing trading tips."""
+
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
+    async def tips(self, ctx):
+        """Provide trading tips."""
+        await ctx.send("Here’s a tip: Always set stop-loss orders!")
+
+def setup(bot):
+    bot.add_cog(Tips(bot))
+
+
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+class GnosisAI(commands.Cog):
+    """AI-Driven Assistant Commands for Gnosis."""
+
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
+    async def ask_gnosis(self, ctx, *, question: str):
+        """Ask Gnosis a question and receive an AI-driven response."""
+        try:
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=f"Act as a trading assistant specializing in meme coins and NFTs. {question}",
+                max_tokens=150,
+                temperature=0.7
+            )
+            answer = response.choices[0].text.strip()
+            await ctx.send(f"Gnosis: {answer}")
+        except Exception as e:
+            await ctx.send(f"Error: {e}")
+
+def setup(bot):
+    bot.add_cog(GnosisAI(bot))
+
+
+
+@bot.tree.command(name="gnosis_query", description="Ask Gnosis a trading question!")
+async def gnosis_query(interaction: discord.Interaction, question: str):
+    response = gnosis_agent.process_query(question)  # Use your AI processing logic
+    await interaction.response.send_message(response)
+
+@bot.tree.command(name="gnosis_tips", description="Get AI-driven trading tips!")
+async def gnosis_tips(interaction: discord.Interaction):
+    tips = gnosis_agent.get_trading_tips()  # Example: AI-generated trading advice
+    await interaction.response.send_message(tips)
+
+
+
 # Function to add the cog to the bot
 def setup(bot):
     bot.add_cog(GnosisCommands(bot))
