@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import snscrape.modules.twitter as sntwitter
 import ssl
 import certifi
+from twitter_integration import api
+
 
 # Fix SSL Context
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -343,6 +345,16 @@ class CryptoTrendAgent:
             f"#crypto #trading #analysis"
         )
         return tweet
+
+@bot.command()
+async def tweet(ctx, *, message: str):
+    """Post a tweet."""
+    try:
+        api.update_status(message)
+        await ctx.send("Tweet posted successfully!")
+    except Exception as e:
+        await ctx.send(f"Failed to post tweet: {e}")
+
 
 # Run the bot
 bot.run(TOKEN)

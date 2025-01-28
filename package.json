@@ -1,0 +1,32 @@
+{
+  "name": "nftdiscordbot",
+  "version": "1.0.0",
+  "description": "An intelligent agent designed to enhance the SEI Network ecosystem by providing real-time analytics, user assistance, and ecosystem insights. Built with scalability and security in mind, this agent serves as a bridge between users and the SEI Network.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webtr3y/Skult-Knowledge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/webtr3y/Skult-Knowledge/issues"
+  },
+  "homepage": "https://github.com/webtr3y/Skult-Knowledge#readme",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "json-server": "^1.0.0-beta.3",
+    "vite": "^6.0.11"
+  },
+  "dependencies": {
+    "next": "^15.1.6"
+  }
+}
